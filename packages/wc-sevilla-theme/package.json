@@ -1,0 +1,14 @@
+{
+  "name": "wc-sevilla-theme",
+  "version": "1.0.0",
+  "description": "A starter theme for the WC Sevilla 2019",
+  "keywords": [
+    "frontity",
+    "frontity-theme"
+  ],
+  "homepage": "https://2019-developers.sevilla.wordcamp.org/",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "frontity": "^1.3.1"
+  }
+}
