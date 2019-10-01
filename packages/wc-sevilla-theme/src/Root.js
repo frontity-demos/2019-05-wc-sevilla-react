@@ -49,7 +49,7 @@ const Header = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: ${({ isPostType }) =>
-    isPostType ? "lightblue" : "palegreen"};
+    isPostType ? "aliceblue" : "mintcream"};
   h1 {
     font-size: 3em;
     text-align: center;
