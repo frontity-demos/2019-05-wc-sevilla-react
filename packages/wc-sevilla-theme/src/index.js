@@ -1,13 +1,4 @@
-import React from "react";
-
-const Root = () => {
-  return (
-    <div>
-      You can edit your package in:
-      <pre>packages/wc-sevilla-theme/src/index.js</pre>
-    </div>
-  );
-};
+import Root from "./Root";
 
 export default {
   name: "wc-sevilla-theme",
@@ -15,9 +6,18 @@ export default {
     theme: Root
   },
   state: {
-    theme: {}
+    theme: {
+      isMenuOpen: false
+    }
   },
   actions: {
-    theme: {}
+    theme: {
+      openMenu: ({ state }) => {
+        state.theme.isMenuOpen = true;
+      },
+      closeMenu: ({ state }) => {
+        state.theme.isMenuOpen = false;
+      }
+    }
   }
 };

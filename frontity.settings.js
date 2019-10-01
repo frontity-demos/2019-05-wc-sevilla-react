@@ -15,7 +15,7 @@ const settings = {
       name: "@frontity/wp-source",
       state: {
         source: {
-          api: "https://test.frontity.io/wp-json"
+          api: "https://2019-developers.sevilla.wordcamp.org/wp-json"
         }
       }
     },
