@@ -28,10 +28,10 @@ Ahora vamos a cambiar las settings para apuntar a la REST API de la web del WC S
 
 Cambiamos esto:
 
-```json
+```js
 state: {
   source: {
-    api: "https://test.frontity.io/wp-json"
+    api: "https://test.frontity.io/wp-json";
   }
 }
 ```
