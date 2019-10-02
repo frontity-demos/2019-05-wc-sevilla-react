@@ -38,10 +38,10 @@ state: {
 
 Por esto:
 
-```json
+```js
 state: {
   source: {
-    api: "https://2019-developers.sevilla.wordcamp.org/wp-json"
+    api: "https://2019-developers.sevilla.wordcamp.org/wp-json";
   }
 }
 ```
@@ -66,7 +66,7 @@ Ahora tenemos que quitar `@frontity/mars-theme` de nuestras settings y sustituir
 
 Eliminamos:
 
-```json
+```js
 {
   name: "@frontity/mars-theme",
   state: {
@@ -89,7 +89,7 @@ Eliminamos:
 
 Y lo sustituimos por:
 
-```json
+```js
 {
   "name": "wc-sevilla-theme"
 },
