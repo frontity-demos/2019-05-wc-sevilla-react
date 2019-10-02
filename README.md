@@ -2,25 +2,31 @@
 
 ## 1. Crear un proyecto con Frontity
 
-El siguiente comando crea la carpeta `wc-sevilla` con el código de nuestro proyecto.
+Lo primero que vamos a hacer es crear un nuevo projecto de Frontity.
+
+Para eso, vamos utilizar este comando:
 
 ```bash
 npx frontity create wc-sevilla
 ```
 
-Vamos a arrancar el proyecto y ver que funciona:
+Cuando termine tendremos una nueva carpeta `/wc-sevilla` con el código de nuestro proyecto.
 
-```bash
+Arrancamos el proyecto para ver que está funcionando:
+
+```
 cd wc-sevilla
 npx frontity dev
 ```
 
-Ahora vemos en http://localhost:3000 nuestro proyecto de Frontity.
+Abrimos http://localhost:3000 en el navegador (si no se ha abierto ya) y vemos nuestro primer proyecto de Frontity. De momento tiene el "starter theme" que viene por defecto: `@frontity/mars-theme` y está conectado a un WordPress de testing (https://test.frontity.io).
 
-Por último, vamos a cambiar las settings para apuntar a la REST API de la web del WC Sevilla 2019.
+Ahora vamos a cambiar las settings para apuntar a la REST API de la web del WC Sevilla 2019.
 
 - Abrimos el archivo `frontity.settings.js`. Este fichero contiene la configuración de los paquetes de Frontity que estemos usando en el proyecto.
 - Cambiamos la configuración del campo `"api"` del paquete `@frontity/wp-source`:
+
+Cambiamos esto:
 
 ```json
 state: {
@@ -30,7 +36,7 @@ state: {
 }
 ```
 
-para que apunte a la web del WC Sevilla 2019:
+Por esto:
 
 ```json
 state: {
@@ -40,17 +46,23 @@ state: {
 }
 ```
 
+Y si refrescamos, deberíamos ver los posts de la web del WC Sevilla 2019.
+
 ## 2. Crear un tema desde cero
 
-En vez de usar el tema que viene por defecto (`mars-theme`) vamos a crear un nuevo paquete para el código de nuestro tema
+En vez de usar el tema que viene por defecto (`@frontity/mars-theme`) vamos a crear un nuevo paquete para el código de nuestro tema.
+
+Paramos el proceso anterior (CONTROL+C) y después ejecutamos:
 
 ```bash
 npx frontity create-package wc-sevilla-theme
 ```
 
-Esto creará la carpeta `/packages/wc-sevilla-theme` en la que ya podemos empezar a trabajar.
+Nos preguntará qué `namespace` queremos. Como es un tema, vamos a usar `theme`.
 
-Ahora tenemos que quitar `@frontity/mars-theme` de nuestras settings y añadir `wc-sevilla-theme`.
+Una vez haya terminado tendremos una nueva carpeta `/packages/wc-sevilla-theme` en la que ya podemos empezar a trabajar.
+
+Ahora tenemos que quitar `@frontity/mars-theme` de nuestras settings y sustituirlo por `wc-sevilla-theme`.
 
 Eliminamos:
 
@@ -75,12 +87,18 @@ Eliminamos:
 },
 ```
 
-Y añadimos:
+Y lo sustituimos por:
 
 ```json
 {
   "name": "wc-sevilla-theme"
 },
+```
+
+Por último, volvemos a arrancar el proyecto:
+
+```bash
+npx frontity dev
 ```
 
 ## 3. Modificar el primer componente
@@ -100,7 +118,8 @@ const Root = () => {
 Ahora vamos a mover el componente `<Root>` a su propio archivo `Root.js`.
 
 ```jsx
-// Root.js
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
 import React from "react";
 
 const Root = () => {
@@ -116,6 +135,25 @@ export default Root;
 
 Y finalmente lo importamos desde `index.js`.
 
+```jsx
+// Archivo: /packages/wc-sevilla-theme/src/index.js
+
+import Root from "./Root";
+
+export default {
+  name: "wc-sevilla-theme",
+  roots: {
+    theme: Root
+  },
+  state: {
+    theme: {}
+  },
+  actions: {
+    theme: {}
+  }
+};
+```
+
 ## 4. Conectarlo al estado
 
 Vamos conectar el componente `<Root>` al estado de Frontity usando `connect`.
@@ -123,6 +161,8 @@ Vamos conectar el componente `<Root>` al estado de Frontity usando `connect`.
 Después, vamos a mostrar la URL en la que estamos, usando `state.router.link`:
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
 import React from "react";
 import { connect } from "frontity";
 
@@ -145,6 +185,8 @@ Podemos probar con una URL como: `http://localhost:3000/hola-sevilla` y vemos c�
 Creamos un componente `<Link>` en un nuevo archivo `Link.js`:
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Link.js
+
 import React from "react";
 import { connect } from "frontity";
 
@@ -170,6 +212,8 @@ export default connect(Link);
 Dentro de `<Root>` importamos el componente Link y añadimos un menú con dos rutas: "Inicio" y "Preguntas frecuentes":
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
 import Link from "./Link";
 
 const Root = ({ state }) => {
@@ -188,7 +232,9 @@ const Root = ({ state }) => {
 
 ## 6. Obtener información de la URL actual
 
-Accedemos a http://localhost:3000/informacion/faq/ en el navegador y abrimos la consola para ver el estado de Frontity usando `frontity.state`.
+Vamos a investigar un poco cómo funciona Frontity por debajo.
+
+Para ello vamos a acceder a http://localhost:3000/informacion/faq/ en el navegador y abrimos la consola. Después vamos a usar `frontity.state` para ver el estado de Frontity:
 
 Vemos que hay estado general sobre `frontity`, también sobre `router` (incluyendo el `state.router.link` que hemos usado ya) y en `source` hay muchas cosas
 
