@@ -21,15 +21,15 @@ const Root = ({ state, actions }) => {
         <p>Estamos en {state.router.link}</p>
         {state.theme.isMenuOpen ? (
           <>
+            <Button onClick={actions.theme.closeMenu}>Cerrar</Button>
             <Menu>
               <Link href="/">Inicio</Link>
               <Link href="/page/2">Inicio - página 2</Link>
               <Link href="/informacion/faq">Preguntas frecuentes</Link>
             </Menu>
-            <Button onClick={actions.theme.closeMenu}>Close</Button>
           </>
         ) : (
-          <Button onClick={actions.theme.openMenu}>Menu</Button>
+          <Button onClick={actions.theme.openMenu}>Menú</Button>
         )}
       </Header>
       <hr />
@@ -78,6 +78,7 @@ const Body = styled.div`
 `;
 
 const Button = styled.button`
+  width: 92px;
   margin: 16px;
   padding: 8px 16px;
   border-radius: 8px;

@@ -8,7 +8,6 @@ const Link = ({ href, actions, children }) => {
         href={href}
         onClick={event => {
           event.preventDefault();
-          actions.theme.closeMenu();
           actions.router.set(href);
         }}
       >
