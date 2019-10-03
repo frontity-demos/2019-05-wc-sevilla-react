@@ -263,9 +263,17 @@ Si abrimos la pestaña Network y hacemos click en el menu para ir a `Inicio`, po
 
 Miramos en `frontity.state.source.data` y vemos que hay muchos datos populados.
 
-Vamos a usar todo esto en nuestro código.
+En vez de usar `state.source.data[url]` vamos a usar `state.source.get(url)` que se asegura de que las urls incluyan siempre la barra final.
 
-_-> En vez de usar `state.source.data[url]` vamos a usar `state.source.get(url)` que se asegura de que las urls incluyan siempre la barra final. Es decir, `/mi-url/` es igual que `/mi-url`._
+Vamos a inspeccionar la página inicial usando `state.source.get("/")`:
+
+<p align="center">
+  <img alt="Frontity en la consola" src="assets/console-4.png">
+</p>
+
+Como vemos, tiene muchas propiedades interesantes como `isHome`, `isArchive`, o un array de `items`. Si fuese una categoría tendría un `isCategory`, si fuese un post tendría un `isPost`, etc.
+
+Finalmente, vamos a usar todo esto en nuestro código.
 
 Obtenemos la información del link actual (`state.router.link`) y lo usamos para ver si es una lista, un post o una página.
 
