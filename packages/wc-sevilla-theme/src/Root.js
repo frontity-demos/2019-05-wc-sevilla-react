@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, Global, css, styled } from "frontity";
+import { connect, Global, styled } from "frontity";
 import Link from "./Link";
 import List from "./List";
 import Post from "./Post";
@@ -10,7 +10,7 @@ const Root = ({ state, actions }) => {
   return (
     <>
       <Global
-        styles={css`
+        styles={`
           html {
             font-family: sans-serif;
           }
@@ -33,11 +33,11 @@ const Root = ({ state, actions }) => {
         )}
       </Header>
       <hr />
-      <Body>
+      <Main>
         {data.isArchive && <List />}
         {data.isPost && <Post />}
         {data.isPage && <Post />}
-      </Body>
+      </Main>
     </>
   );
 };
@@ -48,8 +48,11 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${({ isPostType }) =>
-    isPostType ? "aliceblue" : "mintcream"};
+  ${props =>
+    props.isPostType
+      ? "background-color: aliceblue"
+      : "background-color: mintcream"};
+
   h1 {
     font-size: 3em;
     text-align: center;
@@ -67,7 +70,7 @@ const Menu = styled.div`
   }
 `;
 
-const Body = styled.div`
+const Main = styled.div`
   max-width: 800px;
   margin: auto;
   padding: 16px;
