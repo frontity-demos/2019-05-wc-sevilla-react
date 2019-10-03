@@ -221,10 +221,11 @@ const Root = ({ state }) => {
     <>
       <h1>WordCamp Sevilla 💃</h1>
       <p>Estamos en {state.router.link}</p>
-      <div>
+      <nav>
         <Link href="/">Inicio</Link>
+        <Link href="/page/2">Inicio - página 2</Link>
         <Link href="/informacion/faq/">Preguntas Frecuentes</Link>
-      </div>
+      </nav>
     </>
   );
 };
@@ -278,15 +279,17 @@ const Root = ({ state }) => {
     <>
       <h1>WordCamp Sevilla 💃</h1>
       <p>Estamos en {state.router.link}</p>
-      <div>
+      <nav>
         <Link href="/">Inicio</Link>
         <Link href="/page/2">Inicio - página 2</Link>
         <Link href="/informacion/faq/">Preguntas Frecuentes</Link>
-      </div>
+      </nav>
       <hr />
-      {data.isArchive && <div>Es una lista</div>}
-      {data.isPost && <div>Es un post</div>}
-      {data.isPage && <div>Es una página</div>}
+      <main>
+        {data.isArchive && <div>Es una lista</div>}
+        {data.isPost && <div>Es un post</div>}
+        {data.isPage && <div>Es una página</div>}
+      </main>
     </>
   );
 };
@@ -309,7 +312,7 @@ const List = ({ state }) => {
     <div>
       {data.items.map(item => {
         return (
-          <div key={id}>
+          <div key={item.id}>
             {item.type} – {item.id} – {item.link}
           </div>
         );
@@ -335,9 +338,11 @@ const Root = ({ state }) => {
   return (
     <>
       {/* ... */}
-      {data.isArchive && <List />}
-      {data.isPost && <div>Es un post</div>}
-      {data.isPage && <div>Es una página</div>}
+      <main>
+        {data.isArchive && <List />}
+        {data.isPost && <div>Es un post</div>}
+        {data.isPage && <div>Es una página</div>}
+      </main>
     </>
   );
 };
@@ -382,7 +387,7 @@ import { connect } from "frontity";
 
 const Post = ({ state }) => {
   const data = state.source.get(state.router.link);
-  const post = state.source.[data.type][data.id];
+  const post = state.source[data.type][data.id];
 
   return (
     <div>
@@ -409,9 +414,11 @@ const Root = ({ state }) => {
   return (
     <>
       {/* ... */}
-      {data.isArchive && <List />}
-      {data.isPost && <Post />}
-      {data.isPage && <Post />}
+      <main>
+        {data.isArchive && <List />}
+        {data.isPost && <Post />}
+        {data.isPage && <Post />}
+      </main>
     </>
   );
 };
@@ -463,7 +470,7 @@ import { connect, Global, styled } from "frontity";
 
 // ...
 
-const Header = styled.div`
+const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -474,7 +481,7 @@ const Header = styled.div`
   }
 `;
 
-const Menu = styled.div`
+const Menu = styled.nav`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -485,7 +492,7 @@ const Menu = styled.div`
   }
 `;
 
-const Main = styled.div`
+const Main = styled.main`
   max-width: 800px;
   margin: auto;
   padding: 16px;
