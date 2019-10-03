@@ -230,15 +230,31 @@ const Root = ({ state }) => {
 };
 ```
 
-## 6. Obtener información de la URL actual
+## 6. Usar los datos de la URL actual
 
 Vamos a investigar un poco cómo funciona Frontity por debajo.
 
 Para ello vamos a acceder a http://localhost:3000/informacion/faq/ en el navegador y abrimos la consola. Después vamos a usar `frontity.state` para ver el estado de Frontity:
 
-Vemos que hay estado general sobre `frontity`, también sobre `router` (incluyendo el `state.router.link` que hemos usado ya) y en `source` hay muchas cosas
+<p align="center">
+  <img alt="Frontity en la consola" src="assets/console-1.png">
+</p>
 
-En concreto vamos a fijarnos en `state.source.data`. Ahí se almacena información sobre a qué se corresponde cada URL. Si inspeccionamos `/informacion/faq` podemos ver que es una página con el ID `2452`.
+_–> Frontity usa proxies así que para ver el estado hay que abrir la propiedad `[[Target]]`_
+
+Vemos que hay estado general sobre `frontity`, también sobre `router` (incluyendo el `state.router.link` que hemos usado ya) y en `source` hay muchas cosas.
+
+En concreto vamos a fijarnos en `state.source.data`. Ahí se almacena la información de cada URL. Si inspeccionamos `/informacion/faq` podemos ver que es una página y tiene el ID `2452`.
+
+<p align="center">
+  <img alt="Frontity en la consola" src="assets/console-2.png">
+</p>
+
+Con esa información podemos acceder a los datos (título, contenido...) de esa página usando `state.source.page[2452]`:
+
+<p align="center">
+  <img alt="Frontity en la consola" src="assets/console-3.png">
+</p>
 
 Cuando se navega, el paquete `@frontity/wp-source` se trae todo lo necesario automáticamente y lo almacena en `state.source`.
 
@@ -246,8 +262,9 @@ Si abrimos la pestaña Network y hacemos click en el menu para ir a `Inicio`, po
 
 Miramos en `frontity.state.source.data` y vemos que hay muchos datos populados.
 
-Vamos a poner eso en código.
-En vez de usar `state.source.data` vamos a usar `state.source.get` que se asegura de devolvernos siempre un objeto y de que no pase nada si no incluimos la barra final (`/`).
+Vamos a usar todo esto en nuestro código.
+
+_-> En vez de usar `state.source.data[url]` vamos a usar `state.source.get(url)` que se asegura de que las urls incluyan siempre la barra final. Es decir, `/mi-url/` es igual que `/mi-url`._
 
 Obtenemos la información del link actual (`state.router.link`) y lo usamos para ver si es una lista, un post o una página.
 
@@ -273,9 +290,9 @@ const Root = ({ state }) => {
 };
 ```
 
-## 7. Mostrar las listas
+## 7. Mostrar la lista de posts
 
-Primero hacemos un componente `<List>` que muestra la información que hay en `state.source.data` (`type`, `id` y `link`) de los posts.
+Para mostrar la lista de posts, vamos a hacer un componente `<List>` que muestra la información que hay en `state.source.data`: el `type`, `id` y `link` de cada posts.
 
 ```jsx
 import React from "react";
@@ -355,7 +372,7 @@ import { connect } from "frontity";
 
 const Post = ({ state }) => {
   const data = state.source.get(state.router.link);
-  const post = state.source.post[data.id];
+  const post = state.source.[data.type][data.id];
 
   return (
     <div>
