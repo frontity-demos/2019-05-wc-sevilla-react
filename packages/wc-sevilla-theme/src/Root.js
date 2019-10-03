@@ -44,7 +44,7 @@ const Root = ({ state, actions }) => {
 
 export default connect(Root);
 
-const Header = styled.div`
+const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,7 +59,7 @@ const Header = styled.div`
   }
 `;
 
-const Menu = styled.div`
+const Menu = styled.nav`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -70,7 +70,7 @@ const Menu = styled.div`
   }
 `;
 
-const Main = styled.div`
+const Main = styled.main`
   max-width: 800px;
   margin: auto;
   padding: 16px;
