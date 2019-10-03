@@ -557,7 +557,7 @@ const Header = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: ${({ isPostType }) =>
-    isPostType ? "lightblue" : "palegreen"};
+    isPostType ? "aliceblue" : "mintcream"};
 
   h1 {
     font-size: 3em;
@@ -671,7 +671,7 @@ Por esto:
 
 El menú ha desaparecido, pero no te preocupes, vamos a añadir dos botones.
 
-Primero uno que se muestre cuando
+Primero uno que se va a encargar de mostrar el menú cuando lo pulsemos. Es tan sencillo como poner un elemento `<button>` y pasarle la acción `openMenu` en la prop `onClick`.
 
 ```jsx
 {
@@ -685,6 +685,58 @@ Primero uno que se muestre cuando
     </>
   ) : (
     <button onClick={actions.theme.openMenu}>Menu</button>
+  );
+}
+```
+
+Ahora el menú se queda abierto. Nos falta añadir un botón para poder cerrarlo.
+
+```jsx
+{
+  state.theme.isMenuOpen ? (
+    <>
+      <button onClick={actions.theme.closeMenu}>Cerrar</button>
+      <Menu>
+        <Link href="/">Inicio</Link>
+        <Link href="/page/2">Inicio - página 2</Link>
+        <Link href="/informacion/faq">Preguntas frecuentes</Link>
+      </Menu>
+    </>
+  ) : (
+    <button onClick={actions.theme.openMenu}>Menu</button>
+  );
+}
+```
+
+Por último, vamos a darle algo de estilo a nuestro botón de menú, de la misma forma que hemos hecho antes, usando `styled`.
+
+```jsx
+const Button = styled.button`
+  width: 92px;
+  margin: 16px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: white;
+  color: black;
+  font-weight: bold;
+`;
+```
+
+Sólo queda sustituir los elementos `<button>` por el componente `<Button>` y ya estaría todo.
+
+```jsx
+{
+  state.theme.isMenuOpen ? (
+    <>
+      <Button onClick={actions.theme.closeMenu}>Cerrar</Button>
+      <Menu>
+        <Link href="/">Inicio</Link>
+        <Link href="/page/2">Inicio - página 2</Link>
+        <Link href="/informacion/faq">Preguntas frecuentes</Link>
+      </Menu>
+    </>
+  ) : (
+    <Button onClick={actions.theme.openMenu}>Menu</Button>
   );
 }
 ```
