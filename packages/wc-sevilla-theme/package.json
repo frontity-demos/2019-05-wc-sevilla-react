@@ -9,6 +9,6 @@
   "homepage": "https://2019-developers.sevilla.wordcamp.org/",
   "license": "Apache-2.0",
   "dependencies": {
-    "frontity": "^1.3.1"
+    "frontity": "^1.4.0"
   }
 }
