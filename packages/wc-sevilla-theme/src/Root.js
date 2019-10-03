@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, Global, styled } from "frontity";
+import { connect, Global, css, styled } from "frontity";
 import Link from "./Link";
 import List from "./List";
 import Post from "./Post";
@@ -10,7 +10,7 @@ const Root = ({ state, actions }) => {
   return (
     <>
       <Global
-        styles={`
+        styles={css`
           html {
             font-family: sans-serif;
           }

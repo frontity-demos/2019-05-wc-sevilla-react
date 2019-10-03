@@ -436,13 +436,13 @@ const Root = ({ state }) => {
 
 Ahora mismo nuestra página no tiene ningún estilo. Vamos a añadir unos muy básicos para que al menos el contenido esté bien posicionado.
 
-Lo primero que haremos será crear unos estilos globales y cambiar la fuente para que sea `sans-serif`. Para ello, importamos el componente `<Global>` de frontity en `Root.js`.
+Lo primero que haremos será crear unos estilos globales y cambiar la fuente para que sea `sans-serif`. Para ello, importamos el componente `<Global>` y la función `css` de frontity en `Root.js`.
 
 ```jsx
 // Archivo: /packages/wc-sevilla-theme/src/Root.js
 
 // ...
-import { connect, Global } from "frontity";
+import { connect, Global, css } from "frontity";
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link);
@@ -450,7 +450,7 @@ const Root = ({ state }) => {
   return (
     <>
       <Global
-        styles={`
+        styles={css`
           html {
             font-family: sans-serif;
           }
@@ -474,8 +474,7 @@ En el fichero `Root.js`, importamos `styled` y creamos los componentes anteriore
 // Archivo: /packages/wc-sevilla-theme/src/Root.js
 
 // ...
-import { connect, Global, styled } from "frontity";
-
+import { connect, Global, css, styled } from "frontity";
 // ...
 
 const Header = styled.header`
@@ -524,7 +523,7 @@ const Root = ({ state, actions }) => {
   return (
     <>
       <Global
-        styles={`
+        styles={css`
           html {
             font-family: sans-serif;
           }
