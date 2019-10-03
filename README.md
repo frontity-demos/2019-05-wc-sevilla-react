@@ -269,6 +269,8 @@ _-> En vez de usar `state.source.data[url]` vamos a usar `state.source.get(url)`
 Obtenemos la información del link actual (`state.router.link`) y lo usamos para ver si es una lista, un post o una página.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link);
 
@@ -295,6 +297,8 @@ const Root = ({ state }) => {
 Para mostrar la lista de posts, vamos a hacer un componente `<List>` que muestra la información que hay en `state.source.data`: el `type`, `id` y `link` de cada posts.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/List.js
+
 import React from "react";
 import { connect } from "frontity";
 
@@ -320,6 +324,8 @@ export default connect(List);
 Y lo importamos en `Root.js`:
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
 // ...
 import List from "./List";
 
@@ -340,6 +346,8 @@ const Root = ({ state }) => {
 Ahora, desde el componente `<List>` accedemos a la información de cada uno de los posts, para mostrar el título y convertirlo en un link.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/List.js
+
 import React from "react";
 import { connect } from "frontity";
 import Link from "./Link";
@@ -367,6 +375,8 @@ const List = ({ state }) => {
 Creamos un componente `<Post>` para que muestre el título y el contenido:
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Post.js
+
 import React from "react";
 import { connect } from "frontity";
 
@@ -388,6 +398,8 @@ export default connect(Post);
 Y ahora, igual que antes, lo importamos en `Root.js` y lo usamos para los posts y las páginas:
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
 // ...
 import Post from "./Post";
 
@@ -409,11 +421,13 @@ const Root = ({ state }) => {
 
 Ahora mismo nuestra página no tiene ningún estilo. Vamos a añadir unos muy básicos para que al menos el contenido esté bien posicionado.
 
-Lo primero que haremos será crear unos estilos globales y cambiar la fuente para que sea `sans-serif`. Para ello, importamos el componente `<Global>` de frontity y la función `css`, en `Root.js`.
+Lo primero que haremos será crear unos estilos globales y cambiar la fuente para que sea `sans-serif`. Para ello, importamos el componente `<Global>` de frontity en `Root.js`.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
 // ...
-import { connect, Global, css } from "frontity";
+import { connect, Global } from "frontity";
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link);
@@ -421,7 +435,7 @@ const Root = ({ state }) => {
   return (
     <>
       <Global
-        styles={css`
+        styles={`
           html {
             font-family: sans-serif;
           }
@@ -442,8 +456,10 @@ Para que veamos un ejemplo, vamos a crear dos componente `<Header>`, `<Menu>` y 
 En el fichero `Root.js`, importamos `styled` y creamos los componentes anteriores.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
 // ...
-import { connect, Global, css, styled } from "frontity";
+import { connect, Global, styled } from "frontity";
 
 // ...
 
@@ -469,7 +485,7 @@ const Menu = styled.div`
   }
 `;
 
-const Body = styled.div`
+const Main = styled.div`
   max-width: 800px;
   margin: auto;
   padding: 16px;
@@ -483,13 +499,17 @@ const Body = styled.div`
 Una vez creados, los usaremos dentro de `<Root>`
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 const Root = ({ state, actions }) => {
   const data = state.source.get(state.router.link);
 
   return (
     <>
       <Global
-        styles={css`
+        styles={`
           html {
             font-family: sans-serif;
           }
@@ -505,11 +525,11 @@ const Root = ({ state, actions }) => {
         </Menu>
       </Header>
       <hr />
-      <Body>
+      <Main>
         {data.isArchive && <List />}
         {data.isPost && <Post />}
         {data.isPage && <Post />}
-      </Body>
+      </Main>
     </>
   );
 };
@@ -522,6 +542,8 @@ Haremos lo mismo para el componente `<List>`.
 En el fichero `List.js`, añadimos el componente `<Items>` y lo usamos dentro de`<List>`.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/List.js
+
 const Items = styled.div`
   & > div {
     margin: 16px 0;
@@ -552,12 +574,18 @@ Nos queda añadir algún estilo dinámico, para que veamos cómo modificar los e
 Por ejemplo, vamos a hacer que el color de fondo de nuestro `<Header>` cambie en función de la página que estemos visitando. Para ello, podemos añadir una función dentro del _template string_ de `<Header>`, donde podremos utilizar las props que le pasemos a dicho componente. En este caso, va a recibir la prop booleana `isPostType`, y mostrar un color azul si es `true` o verde si es `false`.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 const Header = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${({ isPostType }) =>
-    isPostType ? "aliceblue" : "mintcream"};
+  ${props =>
+    props.isPostType
+      ? "background-color: aliceblue"
+      : "background-color: mintcream"};
 
   h1 {
     font-size: 3em;
@@ -569,6 +597,10 @@ const Header = styled.div`
 Una vez añadida la función, podemos pasarle la prop `isPostType` a `<Header>`.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 const Root = ({ state, actions }) => {
   const data = state.source.get(state.router.link);
 
@@ -590,7 +622,7 @@ const Root = ({ state, actions }) => {
 };
 ```
 
-Nuestra web es ahora ligeramente más _bonita_.
+Nuestra web es ahora _ligeramente más bonita_.
 
 ## 10. Usar `state` y `actions`
 
@@ -599,6 +631,8 @@ Por último, vamos a aprender cómo añadir nuestro propio estado y nuestras pro
 Volvemos al archivo `index.js` y añadimos una nuevo campo llamado `isMenuOpen` en `state.theme`. Por defecto lo vamos a dejar en `false`:
 
 ```js
+// Archivo: /packages/wc-sevilla-theme/src/index.js
+
 export default {
   name: "wc-sevilla-theme",
   roots: {
@@ -618,6 +652,8 @@ export default {
 También vamos a añadir dos acciones para modificar ese campo. Una para abrir el menú y otra para cerrarlo:
 
 ```js
+// Archivo: /packages/wc-sevilla-theme/src/index.js
+
 export default {
   name: "wc-sevilla-theme",
   roots: {
@@ -630,6 +666,7 @@ export default {
   },
   actions: {
     theme: {
+      // añadimos estas acciones:
       openMenu: ({ state }) => {
         state.theme.isMenuOpen = true;
       },
@@ -646,6 +683,10 @@ Por último, vamos a ir a nuestro archivo `Root.js` y vamos a modificar nuestro 
 Cambiamos esto:
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 <Menu>
   <Link href="/">Inicio</Link>
   <Link href="/page/2">Inicio - página 2</Link>
@@ -656,6 +697,10 @@ Cambiamos esto:
 Por esto:
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 {
   state.theme.isMenuOpen ? (
     <>
@@ -674,6 +719,10 @@ El menú ha desaparecido, pero no te preocupes, vamos a añadir dos botones.
 Primero uno que se va a encargar de mostrar el menú cuando lo pulsemos. Es tan sencillo como poner un elemento `<button>` y pasarle la acción `openMenu` en la prop `onClick`.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 {
   state.theme.isMenuOpen ? (
     <>
@@ -692,6 +741,10 @@ Primero uno que se va a encargar de mostrar el menú cuando lo pulsemos. Es tan 
 Ahora el menú se queda abierto. Nos falta añadir un botón para poder cerrarlo.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 {
   state.theme.isMenuOpen ? (
     <>
@@ -711,6 +764,10 @@ Ahora el menú se queda abierto. Nos falta añadir un botón para poder cerrarlo
 Por último, vamos a darle algo de estilo a nuestro botón de menú, de la misma forma que hemos hecho antes, usando `styled`.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 const Button = styled.button`
   width: 92px;
   margin: 16px;
@@ -725,6 +782,10 @@ const Button = styled.button`
 Sólo queda sustituir los elementos `<button>` por el componente `<Button>` y ya estaría todo.
 
 ```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+
+// ...
+
 {
   state.theme.isMenuOpen ? (
     <>
