@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, Global, css, styled } from "frontity";
+import { connect, Global, css, styled, Head } from "frontity";
 import Link from "./Link";
 import List from "./List";
 import Post from "./Post";
@@ -9,6 +9,13 @@ const Root = ({ state, actions }) => {
 
   return (
     <>
+      <Head>
+        <title>WordCamp Sevilla 2019</title>
+        <meta
+          name="description"
+          content="El tema de React de la primera WC para devs!"
+        />
+      </Head>
       <Global
         styles={css`
           html {

@@ -821,3 +821,29 @@ Sólo queda sustituir los elementos `<button>` por el componente `<Button>` y ya
   );
 }
 ```
+
+## 11. Añadir etiquetas en el `<head>`
+
+Para añadir etiquetas en el `<head>` de vuestra página también vamos a utilizar React. Simplemente importamos el componente `<Head>` y todo lo que incluyamos dentro acabará ahí.
+
+```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Root.js
+import { ..., Head } from "frontity";
+
+// ...
+
+const Root = ({ state, actions }) => {
+  const data = state.source.get(state.router.link);
+
+  return (
+    <>
+      <Head>
+        <title>WordCamp Sevilla 2019</title>
+        <meta name="description" content="El tema de React de la primera WC para devs!" />
+      </Head>
+      {/* ... */}
+  );
+};
+```
+
+Como es un componente de React, lo puedes incluir donde quieras. No hace falta que esté en `<Root>`. Además puedes usar variables para que las etiquetas cambien dinámicamente igual que haces en cualquier otro componente de React.
