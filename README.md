@@ -1,5 +1,9 @@
 # Crea un tema con React en menos de 30 minutos
 
+Este repo la vamos a utilizar como segunda parte del taller [Crea un tema con React en menos de 30 minutos](https://2019-developers.sevilla.wordcamp.org/session/crea-un-tema-con-react-en-menos-de-30-minutos/) en la que vamos a crear un tema con React para WordPress.
+
+Los slides de la primera parte [los puedes ver aquí](https://bit.ly/wc-sevilla-react).
+
 ## 1. Crear un proyecto con Frontity
 
 Lo primero que vamos a hacer es crear un nuevo projecto de Frontity.
@@ -431,6 +435,8 @@ const Root = ({ state }) => {
   );
 };
 ```
+
+# Extra
 
 ## 9. Añadir algo de estilo
 
