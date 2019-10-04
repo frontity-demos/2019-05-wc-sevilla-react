@@ -847,3 +847,13 @@ const Root = ({ state, actions }) => {
 ```
 
 Como es un componente de React, lo puedes incluir donde quieras. No hace falta que esté en `<Root>`. Además puedes usar variables para que las etiquetas cambien dinámicamente igual que haces en cualquier otro componente de React.
+
+# Enlaces útiles
+
+¿Te ha gustado? ¿Quieres seguir investigando más sobre cómo utilizar Frontity? ¿Quieres aprender más sobre React? Aquí tienes una serie de enlaces donde puedes ampliar información:
+
+[JavaScript && React](https://docs.frontity.org/javascript-and-and-react): una guía muy recomendable para repasar los fundamentos de JavaScript y React.
+
+[Frontity docs](https://docs.frontity.org): toda la documentación del framework de Frontity.
+
+[Frontity community](https://community.frontity.org): la comunidad de Frontity, donde resolver dudas, aprender, colaborar, etc.
