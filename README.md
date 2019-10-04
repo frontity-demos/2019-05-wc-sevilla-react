@@ -707,11 +707,21 @@ Cambiamos esto:
 
 // ...
 
+const Root = ({ state, actions }) => {
+  const data = state.source.get(state.router.link);
+
+  return (
+    <>
+      {/* ... */}
 <Menu>
   <Link href="/">Inicio</Link>
   <Link href="/page/2">Inicio - página 2</Link>
   <Link href="/informacion/faq">Preguntas frecuentes</Link>
 </Menu>
+      {/* ... */}
+    </>
+  );
+};
 ```
 
 Por esto:
@@ -721,8 +731,13 @@ Por esto:
 
 // ...
 
-{
-  state.theme.isMenuOpen ? (
+const Root = ({ state, actions }) => {
+  const data = state.source.get(state.router.link);
+
+  return (
+    <>
+      {/* ... */}
+      {state.theme.isMenuOpen ? (
     <>
       <Menu>
         <Link href="/">Inicio</Link>
@@ -730,8 +745,11 @@ Por esto:
         <Link href="/informacion/faq">Preguntas frecuentes</Link>
       </Menu>
     </>
-  ) : null;
-}
+      ) : null}
+      {/* ... */}
+    </>
+  );
+};
 ```
 
 El menú ha desaparecido, pero no te preocupes, vamos a añadir dos botones.
