@@ -589,6 +589,38 @@ const List = ({ state }) => {
 };
 ```
 
+Y en el componente `Link` vamos a darle un poco de color a nuestros links:
+
+```jsx
+// Archivo: /packages/wc-sevilla-theme/src/Link.js
+
+import React from "react";
+import { connect, styled } from "frontity";
+
+const Anchor = styled.a`
+  color: steelblue;
+`;
+
+const Link = ({ href, actions, children }) => {
+  return (
+    <div>
+      <Anchor
+        href={href}
+        onClick={event => {
+          event.preventDefault();
+          actions.router.set(href);
+          actions.theme.closeMenu();
+        }}
+      >
+        {children}
+      </Anchor>
+    </div>
+  );
+};
+
+export default connect(Link);
+```
+
 Nos queda añadir algún estilo dinámico, para que veamos cómo modificar los estilos en función del estado.
 
 Por ejemplo, vamos a hacer que el color de fondo de nuestro `<Header>` cambie en función de la página que estemos visitando. Para ello, podemos añadir una función dentro del _template string_ de `<Header>`, donde podremos utilizar las props que le pasemos a dicho componente. En este caso, va a recibir la prop booleana `isPostType`, y mostrar un color azul si es `true` o verde si es `false`.
@@ -713,11 +745,11 @@ const Root = ({ state, actions }) => {
   return (
     <>
       {/* ... */}
-<Menu>
-  <Link href="/">Inicio</Link>
-  <Link href="/page/2">Inicio - página 2</Link>
-  <Link href="/informacion/faq">Preguntas frecuentes</Link>
-</Menu>
+      <Menu>
+        <Link href="/">Inicio</Link>
+        <Link href="/page/2">Inicio - página 2</Link>
+        <Link href="/informacion/faq">Preguntas frecuentes</Link>
+      </Menu>
       {/* ... */}
     </>
   );
@@ -738,13 +770,13 @@ const Root = ({ state, actions }) => {
     <>
       {/* ... */}
       {state.theme.isMenuOpen ? (
-    <>
-      <Menu>
-        <Link href="/">Inicio</Link>
-        <Link href="/page/2">Inicio - página 2</Link>
-        <Link href="/informacion/faq">Preguntas frecuentes</Link>
-      </Menu>
-    </>
+        <>
+          <Menu>
+            <Link href="/">Inicio</Link>
+            <Link href="/page/2">Inicio - página 2</Link>
+            <Link href="/informacion/faq">Preguntas frecuentes</Link>
+          </Menu>
+        </>
       ) : null}
       {/* ... */}
     </>
