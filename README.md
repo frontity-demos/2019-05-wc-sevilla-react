@@ -35,7 +35,7 @@ Cambiamos esto:
 ```js
 state: {
   source: {
-    api: "https://test.frontity.io/wp-json";
+    api: "https://test.frontity.io/wp-json"
   }
 }
 ```
@@ -45,7 +45,7 @@ Por esto:
 ```js
 state: {
   source: {
-    api: "https://2019-developers.sevilla.wordcamp.org/wp-json";
+    api: "https://2019-developers.sevilla.wordcamp.org/wp-json"
   }
 }
 ```
