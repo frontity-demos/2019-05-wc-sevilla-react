@@ -1,5 +1,7 @@
 # Crea un tema con React en menos de 30 minutos
 
+<iframe width="904" height="509" src="https://www.youtube.com/embed/gOwrldmBLrQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Este repo la vamos a utilizar como segunda parte del taller [Crea un tema con React en menos de 30 minutos](https://2019-developers.sevilla.wordcamp.org/session/crea-un-tema-con-react-en-menos-de-30-minutos/) en la que vamos a crear un tema con React para WordPress.
 
 Los slides de la primera parte [los puedes ver aquí](https://bit.ly/wc-sevilla-react).
