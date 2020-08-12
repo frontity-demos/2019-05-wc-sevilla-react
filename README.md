@@ -1,6 +1,6 @@
 # Crea un tema con React en menos de 30 minutos
 
-<iframe width="904" height="509" src="https://www.youtube.com/embed/gOwrldmBLrQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Crea un tema con React en menos de 30 minutos](https://raw.githubusercontent.com/frontity-demos/2019-05-wc-sevilla-react/master/assets/Captura%20de%20pantalla%202020-08-12%20a%20las%2011.37.04.png)](https://www.youtube.com/watch?v=Htrsfj6QFLE)
 
 Este repo la vamos a utilizar como segunda parte del taller [Crea un tema con React en menos de 30 minutos](https://2019-developers.sevilla.wordcamp.org/session/crea-un-tema-con-react-en-menos-de-30-minutos/) en la que vamos a crear un tema con React para WordPress.
 
